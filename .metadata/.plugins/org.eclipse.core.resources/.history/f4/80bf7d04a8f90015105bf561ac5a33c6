@@ -1,0 +1,157 @@
+package Connect4GUI;
+
+import java.util.Optional;
+
+import javafx.application.Application;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
+
+public class GameBoard extends Application {
+
+	public GridPane gameboard;
+	public Scene scene;
+	public boolean turn = true; //true is player1, false is player2
+	public GameHandler gameHandler;
+	public Stage primaryStage;
+	public Label playerTurn;
+	public Alert endingAlert;
+	public ButtonType quitButton;
+	public ButtonType replayButton;
+	
+	
+	
+	public static void main(String[] args) {
+		launch(args);
+		
+	}
+
+	@Override
+	public void start(Stage stage) throws Exception {
+		
+		buildWindows();
+		gameHandler = new GameHandler(gameboard);
+		buildBoard();
+		createEventHandler();
+		printAnswer();
+		primaryStage = stage;
+		
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		primaryStage.setTitle("BTG Connect 4");
+		primaryStage.setResizable(false);
+		
+	}
+
+	public void createEventHandler() {
+		for(Node cell : gameboard.getChildren()) {
+			cell.setOnMouseClicked(e -> {
+				@SuppressWarnings("static-access")
+				int rowClicked = gameboard.getRowIndex(cell);
+				@SuppressWarnings("static-access")
+				int colClicked = gameboard.getColumnIndex(cell);
+				System.out.println("You clicked (" + colClicked + "," + rowClicked + ")");
+				
+				if (turn) { 
+					gameHandler.placeChip(colClicked, "player1.png");
+					turn = false;
+					if(gameHandler.isSolution(1)) {
+						System.out.println("Player 1 wins!");
+					}
+					if(!turn)
+						playerTurn.setText("Player 2's Turn!");
+					
+					
+				
+				else {
+					gameHandler.placeChip(colClicked, "player2.png");
+					turn = true;
+					if(gameHandler.isSolution(2)) {
+						System.out.println("Player 2 wins!");
+					}
+					if(turn)
+						playerTurn.setText("Player 1's Turn!");
+				}
+			}
+			
+				});
+			}
+		}
+		
+	public void playerWon(String player) {
+		endingAlert.setTitle("A Player has won");
+		endingAlert.setContentText(player + " has won!");
+		playerTurn.setText(player + " has won!");
+		
+		Optional<ButtonType> result = endingAlert.showAndWait();
+		if(result.get()==quitButton) {
+			endingAlert.close();
+			primaryStage.close();
+		}
+		else{
+			endingAlert.close();
+			resetGame();
+		}
+	}
+	
+
+
+	public void resetGame() {
+		turn = true;
+		try {
+			this.start(primaryStage);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	private void buildBoard() {
+		for (int i =0; i < 7; i++) {
+			for(int j = 0; j < 6; j++) {
+				ImageView temp = new ImageView("file:./images/emptycell.png");
+				temp.setId("empty");
+				//gameboard.add(new ImageView("file:./images/emptycell.png"), i, j);
+				gameboard.add(temp, j, i);
+				
+
+			}
+		}
+		playerTurn.setText("Player 1's Turn!");
+		gameboard.add(playerTurn,0,7,7,1);
+	}
+
+	public void buildWindows() {
+		gameboard = new GridPane();
+		scene = new Scene(gameboard, 525, 500);
+		gameboard.setStyle("-fx-background-color:gray;");
+		endingAlert = new Alert(AlertType.NONE);
+		quitButton = new ButtonType("Quit");
+		replayButton = new ButtonType("New Game");
+		endingAlert.getButtonTypes().setAll(replayButton, quitButton);
+		endingAlert.setTitle("Game Over!");
+		playerTurn = new Label();
+		playerTurn.setFont(new Font (30));
+		playerTurn.setTextFill(Color.GRAY);
+		
+	}
+	
+	public void printAnswer() {
+		if (turn) {
+			System.out.println("It's Player 1's Turn");
+		}
+		
+		if (turn == false) {
+			System.out.println("It's Player 2's Turn");
+		}
+	}
+}

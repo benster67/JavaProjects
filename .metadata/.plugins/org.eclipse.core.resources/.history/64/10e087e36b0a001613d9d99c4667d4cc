@@ -1,0 +1,94 @@
+import java.io.File;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+
+
+public class DirectoryCompare extends Application  {
+	public Scene scene;
+	public int XSize = 1000;
+	public int YSize = 1000;
+	public String fileDirectory1 = "/Users/Ben/Documents/Programming";
+	public String fileDirectory2 = "/Users/Ben/Documents";
+	
+	public static void main(String[] args) {
+		Application.launch(args);
+	}
+	
+	public void start(Stage primaryStage) throws Exception {
+		
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		primaryStage.setTitle("BTG DirectoryCompare");
+		primaryStage.setResizable(true);
+		buildWindows();
+		checkFiles();
+		sameDirectory();
+		
+		
+	}
+	
+	public void buildWindows() {
+		
+		BorderPane GUI = new BorderPane();
+		scene = new Scene(GUI,XSize,YSize);
+		GUI.setStyle("-fx-background-color:gray;");
+		
+	}
+	
+	public void checkFiles() {
+		File folder = new File(fileDirectory1);
+		File[] listOfFiles = folder.listFiles();
+
+		    for (int i = 0; i < listOfFiles.length; i++) {
+		      if (listOfFiles[i].isFile()) {
+				String FileName =("File " + listOfFiles[i].getName());
+				System.out.println(FileName);
+		      } 
+		      else if (listOfFiles[i].isDirectory()) {
+		        String fileDirectory = ("Directory " + listOfFiles[i].getName());
+		        System.out.println(fileDirectory);
+		      }
+		     
+		    }
+		    
+		}
+	
+		public void checkFilesAgain() {
+			File folder = new File(fileDirectory2);
+			File[] listOfFiles = folder.listFiles();
+
+			    for (int i = 0; i < listOfFiles.length; i++) {
+			      if (listOfFiles[i].isFile()) {
+					String FileName2 =("File " + listOfFiles[i].getName());
+					System.out.println(FileName2);
+			      } 
+			      else if (listOfFiles[i].isDirectory()) {
+			        String fileDirectory2 = ("Directory " + listOfFiles[i].getName());
+			        System.out.println(fileDirectory2);
+			      }
+		}
+	}
+		public void sameDirectory() {
+			if(new String("FileName").equals("FileName2")) {
+				System.out.println("The two directories have the same files in them.");
+			}
+			if(new String("FileName")!=("FileName2")) {
+				System.out.println("The two directories do not have the same files in them.");
+			}
+			
+			if(new String("FileDirectory").equals("FileDirectory2")) {
+				System.out.println("The two directories have the same folders in them.");
+			}
+			
+			if(new String("FileDirectory")!=("FileDirectory2")) {
+				System.out.println("The two directories do not have the same folders in them.");
+			}
+		}
+}
+
+
+

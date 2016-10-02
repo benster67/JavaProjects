@@ -1,0 +1,2 @@
+INDEX VERSION 1.127+/Users/Ben/Documents/Programming/Java Projects/Simple Calculator/.metadata/.plugins/org.eclipse.jdt.core
+3244094435.index

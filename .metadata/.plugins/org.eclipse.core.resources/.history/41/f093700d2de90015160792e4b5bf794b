@@ -1,0 +1,46 @@
+package Connect4GUI;
+
+import javafx.scene.Node;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+
+public class GameHandler {
+	
+	public GridPane gameboard;
+	
+	
+	public GameHandler(GridPane gameboard) {
+		this.gameboard = gameboard;
+		
+	}
+	
+	@SuppressWarnings({ "static-access" })
+	public boolean placeChip(int col, String filename) {
+		ImageView tempChip = new ImageView("file:./images/" + filename);
+		tempChip.setId(filename);
+		Node deadCell = lastEmptyCell(col);
+		if (deadCell == null){
+			return false;
+		}
+		int row = gameboard.getRowIndex(deadCell);
+		gameboard.getChildren().remove(deadCell);
+		gameboard.add(tempChip, col, row);
+		return true;
+	}
+
+	@SuppressWarnings("static-access")
+	public Node lastEmptyCell(int col) {
+		Node node = null;
+		for (Node cell : gameboard.getChildren()) {
+			if(gameboard.getColumnIndex(cell) == col) {
+				if (cell.getId() != null) {
+					return node;
+				}
+				else {
+					node = cell;
+				}
+			}
+		}
+		return node;
+	}
+}

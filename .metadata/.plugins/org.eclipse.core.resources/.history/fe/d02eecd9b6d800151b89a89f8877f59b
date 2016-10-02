@@ -1,0 +1,36 @@
+package Connect4GUI;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+
+public class GameBoard extends Application {
+
+	public GridPane gameboard;
+	public Scene scene;
+	
+	
+	public static void main(String[] args) {
+		launch(args);
+		
+	}
+
+	@Override
+	public void start(Stage stage) throws Exception {
+		
+		buildWindows();
+		
+		stage.setScene(scene);
+		stage.show();
+		stage.setTitle("BTG Connect 4");
+		
+	}
+
+	public void buildWindows() {
+		gameboard = new GridPane();
+		scene = new Scene(gameboard, 800, 600);
+		gameboard.setStyle("-fx-background-color:gray;");
+		
+	}
+}

@@ -1,0 +1,279 @@
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Application;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+
+public class PongGame extends Application {
+
+	public Scene scene;
+	public Group root;
+	public Rectangle greyPaddle;
+	public Rectangle redPaddle;
+	public Circle ball;
+	private Text greyScoreText;
+	private Text redScoreText;
+	private Text greyPlayerWins = new Text("Grey Player Won!");
+	private Text redPlayerWins = new Text("Red Player Won!");
+	
+	
+	//adjustments
+	private double paddleSpeed = 7;
+	private double greyPaddleVelocity = 0;
+	private double redPaddleVelocity = 0;
+	private int winningScore = 6;
+	private int greyScore = 0;
+	private int redScore = 0;
+	private int fps = 60;
+	public int PaddleXSize = 50;
+	public int PaddleYSize = 180;
+	public int BallRadius = 20;
+	private double initialBallVelocity = 2;
+	private double ballAcceleration = 0.4;
+	public int GameWidth = 1024;
+	public int GameHieght = 576;
+	public int GameFontSize = 36;
+	Paint BallColor = Color.BLUE;
+	Paint Paddle1Color = Color.GRAY;
+	Paint Paddle2Color = Color.RED;
+	
+
+	
+	private double ballVelocityX = initialBallVelocity;
+	private double ballVelocityY = initialBallVelocity;
+	
+	@SuppressWarnings("unused")
+	private int frames = 0;
+
+	public static void main(String[] args) {
+		launch(args);
+
+	}
+	
+
+	@Override
+	public void start(Stage primaryStage) {
+		initWindows();
+		setStage(primaryStage);
+		initPaddles();
+		initBall();
+		initScores();
+		initWinningText();
+		initEventHandlers();
+
+		startGame();
+	}
+
+	private void initWinningText() {
+		greyPlayerWins.setX(scene.getWidth() / 2);
+		redPlayerWins.setX(scene.getWidth() / 2);
+		greyPlayerWins.setY(scene.getHeight() / 2);
+		redPlayerWins.setY(scene.getHeight() / 2);
+		
+		greyPlayerWins.setVisible(false);
+		redPlayerWins.setVisible(false);
+		
+		root.getChildren().add(greyPlayerWins);
+		root.getChildren().add(redPlayerWins);
+	}
+
+	private void startGame() {
+		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000 / fps), a -> runGame()));
+		timeline.setCycleCount(Animation.INDEFINITE);
+		timeline.play();
+	}
+
+	private void runGame() {
+		frames++;
+
+		ball.setCenterX(ball.getCenterX() + ballVelocityX);
+		ball.setCenterY(ball.getCenterY() + ballVelocityY);
+		
+		greyPaddle.setY(Math.min(Math.max(greyPaddle.getY() + greyPaddleVelocity, 0), scene.getHeight() - greyPaddle.getHeight()));
+		redPaddle.setY(Math.min(Math.max(redPaddle.getY() + redPaddleVelocity, 0), scene.getHeight() - redPaddle.getHeight()));
+		
+		double greyPaddleRightEdge = greyPaddle.getX() + greyPaddle.getWidth();
+		
+		if (ball.getCenterX() < greyPaddleRightEdge
+				&& ball.getCenterY() >= greyPaddle.getY()
+				&& ball.getCenterY() <= greyPaddle.getY() + greyPaddle.getHeight() )
+		{
+			ballVelocityX = -ballVelocityX;
+			accelerateBall();
+		}
+		
+		double redPaddleLeftEdge = redPaddle.getX();
+		
+		if (ball.getCenterX() > redPaddleLeftEdge
+				&& ball.getCenterY() >= redPaddle.getY()
+				&& ball.getCenterY() <= redPaddle.getY() + redPaddle.getHeight() )
+		{
+			ballVelocityX = -ballVelocityX;
+			accelerateBall();
+			
+		}
+
+		if (ball.getCenterY() >= scene.getHeight() || ball.getCenterY() <= 0) {
+			ballVelocityY = -ballVelocityY;
+		}
+
+		if (ball.getCenterX() >= scene.getWidth() || ball.getCenterX() <= 0) {
+			ballVelocityX = -ballVelocityX;
+		}
+
+		if (ball.getCenterX() >= scene.getWidth()) {
+			greyScore++;
+			greyScoreText.setText(new Integer(greyScore).toString());
+			resetBallPosition();
+			resetBallVelocity();
+		}
+		
+		if (ball.getCenterX() <= 0)
+		{
+			redScore++;
+			redScoreText.setText(new Integer(redScore).toString());
+			resetBallPosition();
+			resetBallVelocity();
+		}
+		
+		if (greyScore == winningScore)
+		{
+			greyPlayerWins.setVisible(true);
+		}
+		
+		if (redScore == winningScore)
+		{
+			redPlayerWins.setVisible(true);
+		}
+
+	}
+	
+	private void resetBallPosition()
+	{
+		ball.setCenterX(scene.getWidth() / 2);
+		ball.setCenterY(scene.getHeight() / 2);
+		
+		initialBallVelocity = -initialBallVelocity;
+	}
+	
+	private void resetBallVelocity()
+	{
+			ballVelocityX = initialBallVelocity;
+			ballVelocityY = initialBallVelocity;
+	}
+	
+	private void accelerateBall()
+	{
+		ballVelocityX += (ballVelocityX < 0) ? -ballAcceleration : ballAcceleration;
+		ballVelocityY += (ballVelocityY < 0) ? -ballAcceleration :  ballAcceleration;
+	}
+
+	@SuppressWarnings("incomplete-switch")
+	public void initEventHandlers() {
+
+		scene.setOnKeyPressed(event -> {
+			switch (event.getCode()) {
+
+			case W:
+				greyPaddleVelocity = -paddleSpeed;
+				break;
+
+			case S:
+				greyPaddleVelocity = paddleSpeed;
+				break;
+
+			case UP:
+				redPaddleVelocity = -paddleSpeed;
+				break;
+
+			case DOWN:
+				redPaddleVelocity = paddleSpeed;
+				break;
+
+			}
+		});
+		
+		scene.setOnKeyReleased(event -> {
+			switch (event.getCode())
+			{
+			case W:
+				greyPaddleVelocity = 0;
+				break;
+
+			case S:
+				greyPaddleVelocity = 0;
+				break;
+
+			case UP:
+				redPaddleVelocity = 0;
+				break;
+
+			case DOWN:
+				redPaddleVelocity = 0;
+				break;
+			}
+		});
+
+	}
+
+	public void initPaddles() {
+		greyPaddle = new Rectangle(PaddleXSize, PaddleYSize);
+		greyPaddle.setFill(Paddle1Color);
+		root.getChildren().add(greyPaddle);
+		greyPaddle.setX(5);
+		greyPaddle.setY((576 / 20) - greyPaddle.getHeight() / 2);
+
+		redPaddle = new Rectangle(PaddleXSize,PaddleYSize);
+		redPaddle.setFill(Paddle2Color);
+		root.getChildren().add(redPaddle);
+		redPaddle.setX(1024 - redPaddle.getWidth() - 5);
+		redPaddle.setY((576 / 20) - redPaddle.getHeight() / 2);
+	}
+
+	private void initBall() {
+		ball = new Circle(BallRadius);
+		ball.setFill(BallColor);
+		root.getChildren().add(ball);
+		resetBallPosition();
+	}
+
+	private void initScores() {
+		greyScoreText = new Text("0");
+		redScoreText = new Text("0");
+		greyScoreText.setFont(Font.font(GameFontSize));
+		redScoreText.setFont(Font.font(GameFontSize));
+		greyScoreText.setFill(Paddle1Color);
+		redScoreText.setFill(Paddle2Color);
+		root.getChildren().add(greyScoreText);
+		root.getChildren().add(redScoreText);
+		greyScoreText.setX(scene.getWidth() / 3);
+		greyScoreText.setY(50);
+		redScoreText.setX(2 * scene.getWidth() / 3);
+		redScoreText.setY(50);
+	}
+
+	public void initWindows() {
+		this.root = new Group();
+		root.setFocusTraversable(true);
+		root.requestFocus();
+
+		this.scene = new Scene(root, GameWidth, GameHieght);
+
+	}
+
+	public void setStage(Stage primaryStage) {
+		primaryStage.setScene(scene);
+		// Window Title
+		primaryStage.setTitle("BTGPong");
+		primaryStage.show();
+	}
+}

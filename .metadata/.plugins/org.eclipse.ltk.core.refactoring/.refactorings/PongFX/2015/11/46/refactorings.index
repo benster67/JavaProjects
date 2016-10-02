@@ -1,0 +1,8 @@
+1447290801836	Move method
+1447293172330	Move method
+1447294805337	Rename field 'greyScore'
+1447294821654	Rename field 'redScore'
+1447295933161	Rename field 'paddle1'
+1447295954863	Rename field 'paddle2'
+1447296251495	Rename field 'initialBallSpeed'
+1447296475970	Rename local variable 'redPaddleRightEdge'

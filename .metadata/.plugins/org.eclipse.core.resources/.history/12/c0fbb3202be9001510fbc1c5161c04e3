@@ -1,0 +1,79 @@
+package Connect4GUI;
+
+import javafx.application.Application;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+
+public class GameBoard extends Application {
+
+	public GridPane gameboard;
+	public Scene scene;
+	public boolean turn = true; //true is player1, false is player2
+	public GameHandler gameHandler;
+	
+	
+	
+	public static void main(String[] args) {
+		launch(args);
+		
+	}
+
+	@Override
+	public void start(Stage stage) throws Exception {
+		
+		buildWindows();
+		gameHandler = new GameHandler(gameboard);
+		buildBoard();
+		createEventHandler();
+		
+		stage.setScene(scene);
+		stage.show();
+		stage.setTitle("BTG Connect 4");
+		stage.setResizable(false);
+		
+	}
+
+	public void createEventHandler() {
+		for(Node cell : gameboard.getChildren()) {
+			cell.setOnMouseClicked(e -> {
+				@SuppressWarnings("static-access")
+				int rowClicked = gameboard.getRowIndex(cell);
+				@SuppressWarnings("static-access")
+				int colClicked = gameboard.getColumnIndex(cell);
+				System.out.println("You clicked (" + colClicked + "," + rowClicked + ")");
+				
+				if (turn) { 
+					gameHandler.placeChip(colClicked, "player1.png");
+				}
+				
+				else {
+					gameHandler.placeChip(colClicked, "player2.png");
+				}
+				turn = !turn;
+			
+				});
+			}
+		}
+		
+
+
+	private void buildBoard() {
+		for (int i =0; i < 7; i++) {
+			for(int j = 0; j < 6; j++) {
+				gameboard.add(new ImageView("file:./images/emptycell.png"), i, j);
+
+			}
+		}
+		
+	}
+
+	public void buildWindows() {
+		gameboard = new GridPane();
+		scene = new Scene(gameboard, 525, 450);
+		gameboard.setStyle("-fx-background-color:gray;");
+		
+	}
+}
