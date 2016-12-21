@@ -1,24 +1,8 @@
-INDEX VERSION 1.127+/Users/Ben/Documents/Programming/Java Projects/.metadata/.plugins/org.eclipse.jdt.core
-1406391707.index
-965335243.index
-3244094435.index
-4059364602.index
-3867611824.index
-1507802583.index
-346711152.index
-3975215079.index
-3785765040.index
-4103544854.index
-1165542491.index
-1271342938.index
-3145990890.index
-4082578982.index
-3369272816.index
-2147531794.index
-786462423.index
-1329627109.index
-1150896613.index
-3199462873.index
-1116271856.index
-2777386132.index
-489563832.index
+INDEX VERSION 1.127+Z:\Java Projects\.metadata\.plugins\org.eclipse.jdt.core
+3803364041.index
+4077774002.index
+2431763143.index
+1941429266.index
+990369798.index
+2776486512.index
+1823356623.index

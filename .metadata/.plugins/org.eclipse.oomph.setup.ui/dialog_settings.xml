@@ -4,4 +4,8 @@
 		<item value="600" key="dialogHeight"/>
 		<item value="800" key="dialogWidth"/>
 	</section>
+	<section name="org.eclipse.oomph.setup.ui.recorder.RecorderPoliciesDialog">
+		<item value="400" key="dialogHeight"/>
+		<item value="600" key="dialogWidth"/>
+	</section>
 </section>
