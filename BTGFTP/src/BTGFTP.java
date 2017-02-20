@@ -1,0 +1,81 @@
+import org.apache.commons.net.ftp.FTPClient;
+import java.io.IOException;
+import java.net.SocketException;
+
+import org.apache.commons.net.ftp.FTPFile;
+
+public class BTGFTP {
+	
+	static int serverReply;
+
+	static int port = 21;
+	static String ServerIP = "107.180.46.218";
+	static String ServerDir = "/httpdocs";
+	
+	static String username = "FTPJavaApp";
+	static String password = "Testing123";
+	
+    public static void main(String[] args) throws IOException {
+    	listDirs();
+    	listFiles();
+    	
+    }
+    public static void serverStatus() {
+    	FTPClient ftp = new FTPClient();
+    	System.out.println("Connected to " + ServerIP);
+		 System.out.print(ftp.getReplyString());
+		 serverReply = ftp.getReplyCode();
+    }
+    public static void listFiles() {
+    	  FTPClient ftp = new FTPClient();
+          try {
+			ftp.connect(ServerIP, port);
+		} catch (SocketException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+         serverStatus();
+          ftp.enterLocalPassiveMode();
+          try {
+			ftp.login(username, password);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+          FTPFile[] files = null;
+		try {
+			files = ftp.listFiles(ServerDir);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+          for (FTPFile file : files) {
+              System.out.println(file.getName());
+          }
+    }
+    public static void listDirs() {
+    	 FTPClient client = new FTPClient();
+         try {
+			client.connect(ServerIP, port);
+		} catch (SocketException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+         client.enterLocalPassiveMode();
+         try {
+			client.login(username, password);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+         serverStatus();
+		  FTPFile[] dirs = null;
+		try {
+			dirs = client.listDirectories(ServerDir);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+       for(FTPFile file : dirs) {
+      	System.out.println(file.getName());
+       }
+    }
+}

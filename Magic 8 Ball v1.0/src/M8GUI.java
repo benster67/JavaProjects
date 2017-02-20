@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 @SuppressWarnings("serial")
 public class M8GUI extends JFrame implements ActionListener{
 	public static JButton think;
-
+String test;
 	JPanel panelControl;
 	JPanel centerPanel;
 	

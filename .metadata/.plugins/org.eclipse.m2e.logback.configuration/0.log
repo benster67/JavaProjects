@@ -221,3 +221,12 @@ java.net.UnknownHostException: services.gradle.org
 	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:669) [org.eclipse.equinox.launcher_1.3.100.v20150511-1540.jar:na]
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:608) [org.eclipse.equinox.launcher_1.3.100.v20150511-1540.jar:na]
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1515) [org.eclipse.equinox.launcher_1.3.100.v20150511-1540.jar:na]
+2016-11-20 09:47:41,627 [main] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache file is out-of-date. Remote download required.
+2017-02-17 16:11:04,307 [Start Help Server] INFO  org.eclipse.jetty.util.log - Logging initialized @768214ms
+2017-02-17 16:11:04,380 [Start Help Server] INFO  org.eclipse.jetty.server.Server - jetty-9.2.13.v20150730
+2017-02-17 16:11:04,413 [Start Help Server] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@394c0478{/help,null,AVAILABLE}
+2017-02-17 16:11:04,469 [Start Help Server] INFO  o.e.jetty.server.ServerConnector - Started ServerConnector@451c76cb{HTTP/1.1}{127.0.0.1:50508}
+2017-02-17 16:11:04,469 [Start Help Server] INFO  org.eclipse.jetty.server.Server - Started @768379ms
+2017-02-17 22:06:48,969 [Stop Help Server] INFO  o.e.jetty.server.ServerConnector - Stopped ServerConnector@451c76cb{HTTP/1.1}{127.0.0.1:0}
+2017-02-17 22:06:49,041 [Stop Help Server] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@394c0478{/help,null,UNAVAILABLE}
+2017-02-17 22:15:05,861 [main] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache file is not available. Remote download required.

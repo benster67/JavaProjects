@@ -1,0 +1,59 @@
+import java.io.IOException;
+
+import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPFile;
+
+public class BTGFTP {
+
+	public static int port = 21;
+	public static String ServerIP = "107.180.46.218";
+	public static String ServerDir = "/httpdocs";
+	
+	public static String username = "benster67";
+	public static String password = "Corvette43";
+	
+    public static void main(String[] args) {
+    	listDirs();
+    	listFiles();
+    }
+    public static void listFiles() {
+		 FTPClient client = new FTPClient();
+		 try {
+			client.login(username, password);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        FTPFile[] files = null;
+		try {
+			files = client.listFiles(BTGFTP.ServerDir);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        for (FTPFile file : files) {
+            System.out.println(file.getName());
+        }
+  }
+  public static void listDirs() {
+  	 FTPClient client = new FTPClient();
+  	 try {
+		client.login(username, password);
+	} catch (IOException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
+       FTPFile[] dirs = null;
+		try {
+			dirs = client.listDirectories(BTGFTP.ServerDir);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+     for(FTPFile file : dirs) {
+    	System.out.println(file.getName());
+     }
+  }
+}
+
+

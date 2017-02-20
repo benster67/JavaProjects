@@ -1,0 +1,61 @@
+import org.apache.commons.net.ftp.FTPClient;
+import java.io.IOException;
+import java.net.SocketException;
+
+import org.apache.commons.net.ftp.FTPFile;
+
+public class BTGFTP {
+
+	static int port = 21;
+	static String ServerIP = "107.180.46.218";
+	static String ServerDir = "/httpdocs";
+	
+	static String username = "benster67";
+	static String password = "Corvette43";
+	
+    public static void main(String[] args) throws IOException {
+//        FTPClient client = new FTPClient();
+//        client.connect(ServerIP, port);
+//        client.enterLocalPassiveMode();
+//        client.login("benster67", "Corvette43");
+//        FTPFile[] files = client.listFiles("/httpdocs");
+//        for (FTPFile file : files) {
+//            System.out.println(file.getName());
+//        }
+//        FTPFile[] dirs = client.listDirectories("/httpdocs");
+//        for(FTPFile file : dirs) {
+//        	System.out.println(file.getName());
+//        }
+//    }
+    	listFiles();
+    }
+    public static void listFiles() {
+    	  FTPClient client = new FTPClient();
+          try {
+			client.connect(ServerIP, port);
+		} catch (SocketException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+          client.enterLocalPassiveMode();
+          try {
+			client.login("benster67", "Corvette43");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+          FTPFile[] files = null;
+		try {
+			files = client.listFiles("/httpdocs");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+          for (FTPFile file : files) {
+              System.out.println(file.getName());
+          }
+    }
+}

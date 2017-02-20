@@ -1,0 +1,19 @@
+import java.io.IOException;
+
+import org.apache.commons.net.ftp.FTP;
+import org.apache.commons.net.ftp.FTPClient;
+
+public class BTGFTP extends FTP {
+	public static void main(String args[]) {
+		FTPClient ftpClient = new FTPClient();
+		try {
+		ftpClient.connect("107.180.46.218");
+		ftpClient.listFiles("/httpdocs");
+		// Eventually other operations here ...
+		ftpClient.disconnect();
+	}
+	catch (IOException e) {
+		e.printStackTrace();
+	}
+	}
+}

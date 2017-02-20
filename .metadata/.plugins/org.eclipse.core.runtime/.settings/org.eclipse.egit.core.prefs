@@ -1,2 +1,5 @@
-GitRepositoriesView.GitDirectories=Z\:\\Java Projects\\.git;
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=c29fd0d85f8088058d590a9ed138822008a7ec13
+GitRepositoriesView.GitDirectories=/Users/Ben/Documents/Programming/Java Projects/.git\:;W\:\\Java Projects\\.git;
 eclipse.preferences.version=1

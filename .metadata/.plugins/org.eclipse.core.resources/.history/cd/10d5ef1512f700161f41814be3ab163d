@@ -1,0 +1,35 @@
+import java.io.IOException;
+
+
+import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPFile;
+
+public class List {
+	 public static void listFiles() {
+		 FTPClient client = new FTPClient();
+         FTPFile[] files = null;
+		try {
+			files = client.listFiles(BTGFTP.ServerDir);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+         for (FTPFile file : files) {
+             System.out.println(file.getName());
+         }
+   }
+   public static void listDirs() {
+   	 FTPClient client = new FTPClient();
+     
+        FTPFile[] dirs = null;
+		try {
+			dirs = client.listDirectories(BTGFTP.ServerDir);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+      for(FTPFile file : dirs) {
+     	System.out.println(file.getName());
+      }
+   }
+}

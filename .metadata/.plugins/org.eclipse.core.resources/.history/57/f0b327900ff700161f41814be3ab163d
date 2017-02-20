@@ -1,0 +1,17 @@
+import java.io.IOException;
+
+public class BTGFTP {
+
+	public static int port = 21;
+	public static String ServerIP = "107.180.46.218";
+	public static String ServerDir = "/httpdocs";
+	
+	public static String username = "benster67";
+	public static String password = "Corvette43";
+	
+    public static void main(String[] args) throws IOException {
+    	List.listDirs();
+    	List.listFiles();
+    }
+   
+}
