@@ -1,3 +1,5 @@
+package application;
+
 import org.apache.commons.net.ftp.FTPClient;
 import java.io.IOException;
 import java.net.SocketException;
@@ -5,7 +7,6 @@ import java.net.SocketException;
 import org.apache.commons.net.ftp.FTPFile;
 
 public class BTGFTP {
-	
 	static int serverReply;
 
 	static int port = 21;
@@ -16,6 +17,7 @@ public class BTGFTP {
 	static String password = "Testing123";
 	
     public static void main(String[] args) throws IOException {
+    	
     	listDirs();
     	listFiles();
     	
@@ -77,5 +79,21 @@ public class BTGFTP {
        for(FTPFile file : dirs) {
       	System.out.println(file.getName());
        }
+    }
+    public static void connect() {
+   	 FTPClient client = new FTPClient();
+     try {
+		client.connect(ServerIP, port);
+	} catch (SocketException e) {
+		e.printStackTrace();
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+     client.enterLocalPassiveMode();
+     try {
+		client.login(username, password);
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
     }
 }
