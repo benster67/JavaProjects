@@ -1,3 +1,4 @@
+
 package application;
 
 import org.apache.commons.net.ftp.FTPClient;
@@ -18,7 +19,7 @@ public class BTGFTP {
 	
     public static void main(String[] args) throws IOException {
     	
-    	listDirs();
+    	//listDirs();
     	listFiles();
     	
     }
@@ -53,33 +54,34 @@ public class BTGFTP {
           for (FTPFile file : files) {
               System.out.println(file.getName());
           }
+          
     }
-    public static void listDirs() {
-    	 FTPClient client = new FTPClient();
-         try {
-			client.connect(ServerIP, port);
-		} catch (SocketException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-         client.enterLocalPassiveMode();
-         try {
-			client.login(username, password);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-         serverStatus();
-		  FTPFile[] dirs = null;
-		try {
-			dirs = client.listDirectories(ServerDir);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-       for(FTPFile file : dirs) {
-      	System.out.println(file.getName());
-       }
-    }
+//    public static void listDirs() {
+//    	 FTPClient client = new FTPClient();
+//         try {
+//			client.connect(ServerIP, port);
+//		} catch (SocketException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//         client.enterLocalPassiveMode();
+//         try {
+//			client.login(username, password);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//         serverStatus();
+//		  FTPFile[] dirs = null;
+//		try {
+//			dirs = client.listDirectories(ServerDir);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//       for(FTPFile file : dirs) {
+//      	System.out.println(file.getName());
+//       }
+//    }
     public static void connect() {
    	 FTPClient client = new FTPClient();
      try {

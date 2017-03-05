@@ -11,4 +11,6 @@
 <fullyQualifiedTypeName name="org.apache.commons.net.ftp.FTPReply"/>
 <fullyQualifiedTypeName name="java.util.Scanner"/>
 <fullyQualifiedTypeName name="org.apache.commons.net.ftp.FTPFile"/>
+<fullyQualifiedTypeName name="java.net.URL"/>
+<fullyQualifiedTypeName name="javafx.fxml.FXMLLoader"/>
 </qualifiedTypeNameHistroy>
