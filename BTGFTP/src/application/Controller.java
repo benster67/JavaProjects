@@ -24,7 +24,8 @@ public class Controller implements Initializable {
 	@FXML
 	Text host;
 	@FXML
-	TextField hostField;
+	static
+	TextField hostField = new TextField();
 	@FXML
 	Text dir;
 	@FXML
@@ -43,6 +44,8 @@ public class Controller implements Initializable {
 	Text ServerStatus;
 	@FXML
 	TextArea ServerStat;
+	
+	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -51,16 +54,9 @@ public class Controller implements Initializable {
 	
 	@FXML
 	public void connectClient(){
-		System.out.println("The connect button was clicked!");
-	}
-	
-	public void print(){
-		try{
-			
-		}
-		catch (Exception e){
-			e.printStackTrace();
-		}
+		String hostname = hostField.getText();
+		System.out.println("test");
+		System.out.println(hostname);
 	}
 	
 	

@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
    <children>
       <Text layoutX="22.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BTG FTP v1.0">
          <font>
@@ -22,7 +22,7 @@
             <Font size="20.0" />
          </font>
       </Text>
-      <TextField layoutX="126.0" layoutY="65.0" promptText="www.example.com" />
+      <TextField fx:id="hostField" layoutX="126.0" layoutY="65.0" promptText="www.example.com" />
       <Text layoutX="22.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Directory:">
          <font>
             <Font size="20.0" />
@@ -54,6 +54,6 @@
          </font>
       </Text>
       <TextArea editable="false" layoutX="379.0" layoutY="59.0" prefHeight="128.0" prefWidth="200.0" />
-      <Button layoutX="300.0" layoutY="59.0" mnemonicParsing="false" onAction="#connectClient" prefHeight="128.0" prefWidth="73.0" text="Connect" />
+      <Button layoutX="294.0" layoutY="59.0" mnemonicParsing="false" onAction="#connectClient" prefHeight="128.0" prefWidth="73.0" text="Connect" />
    </children>
 </Pane>

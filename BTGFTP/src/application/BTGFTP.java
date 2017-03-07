@@ -11,25 +11,21 @@ public class BTGFTP {
 	static int serverReply;
 
 	static int port = 21;
-	static String ServerIP = "107.180.46.218";
+	 static String ServerIP = "107.180.46.218";
 	static String ServerDir = "/httpdocs";
 	
 	static String username = "FTPJavaApp";
 	static String password = "Testing123";
 	
-    public static void main(String[] args) throws IOException {
-    	
-    	//listDirs();
-    	listFiles();
-    	
-    }
-    public static void serverStatus() {
+ 
+    public static  void serverStatus() {
     	FTPClient ftp = new FTPClient();
     	System.out.println("Connected to " + ServerIP);
 		 System.out.print(ftp.getReplyString());
 		 serverReply = ftp.getReplyCode();
     }
-    public static void listFiles() {
+    public static  void listFiles() {
+    	System.out.println(ServerIP);
     	  FTPClient ftp = new FTPClient();
           try {
 			ftp.connect(ServerIP, port);
@@ -56,32 +52,32 @@ public class BTGFTP {
           }
           
     }
-//    public static void listDirs() {
-//    	 FTPClient client = new FTPClient();
-//         try {
-//			client.connect(ServerIP, port);
-//		} catch (SocketException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//         client.enterLocalPassiveMode();
-//         try {
-//			client.login(username, password);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//         serverStatus();
-//		  FTPFile[] dirs = null;
-//		try {
-//			dirs = client.listDirectories(ServerDir);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//       for(FTPFile file : dirs) {
-//      	System.out.println(file.getName());
-//       }
-//    }
+    public static void listDirs() {
+    	 FTPClient client = new FTPClient();
+         try {
+			client.connect(ServerIP, port);
+		} catch (SocketException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+         client.enterLocalPassiveMode();
+         try {
+			client.login(username, password);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+         serverStatus();
+		  FTPFile[] dirs = null;
+		try {
+			dirs = client.listDirectories(ServerDir);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+       for(FTPFile file : dirs) {
+      	System.out.println(file.getName());
+       }
+    }
     public static void connect() {
    	 FTPClient client = new FTPClient();
      try {
