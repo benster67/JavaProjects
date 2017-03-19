@@ -48,6 +48,7 @@ public class Main extends Application {
 		launch(args);
 		//BTGFTP.listDirs();
 		//BTGFTP.listFiles();
+		Controller.connectClient();
 	}
 	
 }
